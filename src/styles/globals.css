@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-heading:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-geist: "Geist", "Inter", -apple-system, sans-serif;
+  --font-inter: "Inter", -apple-system, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #0f172a;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #1e293b;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --ring: #0f172a;
+  --radius: 0.5rem;
+
+  /* Default Color Tokens */
+  --primary-accent: #0f172a;
+  --secondary-accent: #334155;
+  --link-accent: #2563eb;
+  --border-accent: #0f172a;
+}
+
+/* Font Variations */
+.font-modern-sans {
+  font-family: var(--font-sans) !important;
+}
+
+.font-geist {
+  font-family: var(--font-geist) !important;
+}
+
+.font-inter {
+  font-family: var(--font-inter) !important;
+}
+
+.font-editorial-serif {
+  font-family: var(--font-serif) !important;
+}
+
+/* Dynamic Color Accent Themes */
+.theme-slate {
+  --primary-accent: #0f172a;
+  --secondary-accent: #334155;
+  --link-accent: #2563eb;
+  --border-accent: #0f172a;
+}
+
+.theme-navy {
+  --primary-accent: #1e3a8a;
+  --secondary-accent: #1d4ed8;
+  --link-accent: #2563eb;
+  --border-accent: #1e3a8a;
+}
+
+.theme-emerald {
+  --primary-accent: #065f46;
+  --secondary-accent: #047857;
+  --link-accent: #059669;
+  --border-accent: #065f46;
+}
+
+.theme-indigo {
+  --primary-accent: #3730a3;
+  --secondary-accent: #4338ca;
+  --link-accent: #4f46e5;
+  --border-accent: #3730a3;
+}
+
+.theme-ruby {
+  --primary-accent: #881337;
+  --secondary-accent: #be123c;
+  --link-accent: #e11d48;
+  --border-accent: #881337;
+}
+
+/* Dynamic Template Color Utility Classes */
+.template-heading {
+  color: var(--primary-accent, #0f172a) !important;
+  border-color: var(--border-accent, #0f172a) !important;
+}
+
+.template-link {
+  color: var(--link-accent, #2563eb) !important;
+}
+
+.template-name {
+  color: var(--primary-accent, #0f172a) !important;
+}
+
+.template-subtitle {
+  color: var(--secondary-accent, #334155) !important;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scale-Resistant Rigid A4 Page Dimensions */
+.resume-a4-page {
+  width: 210mm !important;
+  max-width: 210mm !important;
+  min-width: 210mm !important;
+  height: 297mm !important;
+  max-height: 297mm !important;
+  min-height: 297mm !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  text-rendering: geometricPrecision !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  transform-origin: top center;
+  flex-shrink: 0 !important;
+}
+
+.resume-a4-page * {
+  box-sizing: border-box;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Scrollbar for Sleek Studio Layout */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ── Print / PDF Export ────────────────────────────────────────────────────── */
+@media print {
+  /* Correct A4 page dimensions with no margin */
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+
+  /* Hide everything except the resume pages */
+  body > *,
+  body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide all UI chrome */
+  header, nav, aside, footer,
+  .print\\:hidden,
+  .print-hidden,
+  [data-print="hidden"] {
+    display: none !important;
+  }
+
+  /* The canvas stage wrapper — reset any pan/zoom transform */
+  [style*="translate3d"],
+  [style*="scale"] {
+    transform: none !important;
+    position: static !important;
+  }
+
+  /* The absolute/overflow-hidden canvas containers */
+  main, .relative.overflow-hidden {
+    position: static !important;
+    overflow: visible !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  /* Each resume page: exact A4, no shadow, full bleed */
+  .resume-a4-page {
+    width: 210mm !important;
+    max-width: 210mm !important;
+    min-width: 210mm !important;
+    height: 297mm !important;
+    max-height: 297mm !important;
+    min-height: 297mm !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 12mm 15mm !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transform: none !important;
+    page-break-after: always;
+    break-after: page;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Last page: no trailing page break */
+  .resume-a4-page:last-of-type {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}
