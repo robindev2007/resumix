@@ -280,11 +280,11 @@ export const ResumePreview: React.FC<ResumePreviewProps> = ({
                 `theme-${theme}`,
                 paperSizeClass,
                 densityClass,
-                "print:m-0 print:shadow-none print:w-full print:h-[297mm] print:break-after-page",
+                "print:m-0 print:shadow-none print:w-full print:h-[297mm] print:break-after-page print:rounded-none print:overflow-visible",
                 className,
               )}>
               {/* Page Content */}
-              <div className="w-full h-full overflow-hidden">
+              <div className="w-full h-full overflow-hidden print:overflow-visible">
                 {renderTemplateForDoc(pageDoc, isPageTwo)}
               </div>
             </div>

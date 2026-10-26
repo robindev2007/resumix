@@ -56,7 +56,11 @@ export const ModernTechTemplate: React.FC<TemplateProps> = ({
                         {" "}
                         -{" "}
                         <a
-                          href={entry.link.url}
+                          href={
+                            entry.link.url.startsWith("http")
+                              ? entry.link.url
+                              : `https://${entry.link.url}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="underline font-semibold template-link inline-flex items-center gap-1">
@@ -167,23 +171,23 @@ export const ModernTechTemplate: React.FC<TemplateProps> = ({
           <div className="text-[10.5pt] font-semibold text-slate-700 mb-1 template-subtitle">
             {p.title} {p.location && <>&nbsp;•&nbsp; {p.location}</>}
           </div>
-          <div className="text-[9.2pt] flex justify-center items-center flex-wrap gap-x-2.5 gap-y-1 text-slate-800">
+          <div className="text-[8.8pt] flex justify-center items-center flex-nowrap whitespace-nowrap gap-x-2 text-slate-800">
             {contactLinks.map((item, idx) => (
               <React.Fragment key={idx}>
                 <a
                   href={item.href}
                   target={item.isExternal ? "_blank" : undefined}
                   rel={item.isExternal ? "noopener noreferrer" : undefined}
-                  className="hover:underline inline-flex items-center gap-1">
+                  className="hover:underline inline-flex items-center gap-1 shrink-0">
                   <SocialIcon
                     url={item.rawUrl}
                     label={item.label}
-                    className="w-3.5 h-3.5 text-slate-600"
+                    className="w-3.5 h-3.5 text-slate-600 shrink-0"
                   />
                   <span>{item.label}</span>
                 </a>
                 {idx < contactLinks.length - 1 && (
-                  <span className="text-slate-300">|</span>
+                  <span className="text-slate-300 select-none">|</span>
                 )}
               </React.Fragment>
             ))}

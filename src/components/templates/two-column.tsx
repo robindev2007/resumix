@@ -69,7 +69,11 @@ export const TwoColumnTemplate: React.FC<TemplateProps> = ({
                         {" "}
                         -{" "}
                         <a
-                          href={entry.link.url}
+                          href={
+                            entry.link.url.startsWith("http")
+                              ? entry.link.url
+                              : `https://${entry.link.url}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="underline font-semibold template-link inline-flex items-center gap-1">

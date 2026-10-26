@@ -56,7 +56,11 @@ export const ClassicLatexTemplate: React.FC<TemplateProps> = ({
                         {" "}
                         -{" "}
                         <a
-                          href={entry.link.url}
+                          href={
+                            entry.link.url.startsWith("http")
+                              ? entry.link.url
+                              : `https://${entry.link.url}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="underline inline-flex items-center gap-1">
@@ -165,23 +169,23 @@ export const ClassicLatexTemplate: React.FC<TemplateProps> = ({
           <div className="text-[10pt] italic text-slate-800 mb-1">
             {p.title} {p.location && <>&nbsp;•&nbsp; {p.location}</>}
           </div>
-          <div className="text-[9.2pt] flex justify-center items-center flex-wrap gap-x-2.5 gap-y-1 text-slate-800 font-sans">
+          <div className="text-[8.8pt] flex justify-center items-center flex-nowrap whitespace-nowrap gap-x-2 text-slate-800 font-sans">
             {contactLinks.map((item, idx) => (
               <React.Fragment key={idx}>
                 <a
                   href={item.href}
                   target={item.isExternal ? "_blank" : undefined}
                   rel={item.isExternal ? "noopener noreferrer" : undefined}
-                  className="hover:underline inline-flex items-center gap-1">
+                  className="hover:underline inline-flex items-center gap-1 shrink-0">
                   <SocialIcon
                     url={item.rawUrl}
                     label={item.label}
-                    className="w-3.5 h-3.5"
+                    className="w-3.5 h-3.5 shrink-0"
                   />
                   <span>{item.label}</span>
                 </a>
                 {idx < contactLinks.length - 1 && (
-                  <span className="text-slate-400">|</span>
+                  <span className="text-slate-400 select-none">|</span>
                 )}
               </React.Fragment>
             ))}

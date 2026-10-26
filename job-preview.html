@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Job Tracker & Research Hub | Dhaka & Remote BD</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      code,
+      pre {
+        font-family: "JetBrains Mono", monospace;
+      }
+      .pulse-urgent {
+        animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      @keyframes pulse-border {
+        0%,
+        100% {
+          border-color: rgba(239, 68, 68, 0.8);
+          box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);
+        }
+        50% {
+          border-color: rgba(239, 68, 68, 0.3);
+          box-shadow: 0 0 5px rgba(239, 68, 68, 0.05);
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#eef2ff",
+                100: "#e0e7ff",
+                500: "#6366f1",
+                600: "#4f46e5",
+                700: "#4338ca",
+                900: "#312e81",
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+    <!-- Top Header Navigation -->
+    <header
+      class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
+            <i class="fa-solid fa-briefcase text-lg"></i>
+          </div>
+          <div>
+            <h1
+              class="text-lg font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+              Tech Job Vault & Research Engine
+            </h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400">
+              Structured Management & Intelligence Hub
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <!-- Active Pipeline Pill -->
+          <span
+            class="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-xs font-semibold">
+            <i class="fa-solid fa-layer-group text-indigo-500"></i> 2
+            Opportunities Tracked
+          </span>
+
+          <!-- Dark mode toggle -->
+          <button
+            id="themeToggle"
+            class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <i id="themeIcon" class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Job Selector Ribbon -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
+      <div
+        class="bg-white dark:bg-slate-800/80 p-2 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col sm:flex-row gap-2">
+        <!-- Card Button 1: Basirah -->
+        <button
+          onclick="selectJob('basirah')"
+          id="jobBtn-basirah"
+          class="flex-1 p-3.5 rounded-xl text-left transition flex items-center justify-between border bg-indigo-50/80 dark:bg-indigo-950/50 border-indigo-400 dark:border-indigo-600 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">
+              B
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-sm text-slate-900 dark:text-white">
+                  Basirah Digital Solutions
+                </h3>
+                <span
+                  class="px-2 py-0.5 text-[10px] font-extrabold bg-red-500 text-white rounded-full uppercase"
+                  >30 Sep</span
+                >
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Software Engineer (AdTech / Go / ClickHouse) • Banani, Dhaka
+              </p>
+            </div>
+          </div>
+          <i
+            class="fa-solid fa-chevron-right text-xs text-indigo-500 hidden sm:block"></i>
+        </button>
+
+        <!-- Card Button 2: Premise SaaS -->
+        <button
+          onclick="selectJob('premise')"
+          id="jobBtn-premise"
+          class="flex-1 p-3.5 rounded-xl text-left transition flex items-center justify-between border border-transparent hover:bg-slate-100 dark:hover:bg-slate-700/50">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">
+              P
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-sm text-slate-900 dark:text-white">
+                  Premise SaaS (PremiseHQ)
+                </h3>
+                <span
+                  class="px-2 py-0.5 text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-full"
+                  >15 Oct</span
+                >
+              </div>
+              <p class="text-xs text-slate-500 dark:text-slate-400">
+                Full Stack Developer (Entry/Intern) • 100% Remote (BD)
+              </p>
+            </div>
+          </div>
+          <i
+            class="fa-solid fa-chevron-right text-xs text-slate-400 hidden sm:block"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Job 1 Dynamic Hero: Basirah -->
+    <div
+      id="hero-basirah"
+      class="job-hero max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 w-full block">
+      <div
+        class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden pulse-urgent border border-red-500/40">
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+          <div class="space-y-3 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-2">
+              <span
+                class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-red-500 text-white rounded-full flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-fire"></i> Urgent: Deadline Tomorrow (30
+                Sep 2026)
+              </span>
+              <span
+                class="px-3 py-1 text-xs font-medium bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full">
+                Banani, Dhaka (On-site)
+              </span>
+              <span
+                class="px-3 py-1 text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full">
+                Fresh Graduates / Junior Friendly
+              </span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Software Engineer
+              <span class="text-indigo-400 font-normal">at</span> Basirah
+              Digital Solutions
+            </h2>
+
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Proprietary AdTech platforms (SSP/DSP), real-time bidding
+              algorithms, sub-millisecond data analytics with
+              <strong class="text-white">Go</strong>,
+              <strong class="text-white">Express.js</strong>,
+              <strong class="text-white">ClickHouse</strong>, &
+              <strong class="text-white">Redis</strong>.
+            </p>
+
+            <div
+              class="flex items-center gap-2 text-xs text-amber-300 font-mono pt-1">
+              <i class="fa-regular fa-clock"></i>
+              <span id="countdown-basirah">Calculating deadline...</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
+            <a
+              href="https://lnkd.in/gXkWeUPF"
+              target="_blank"
+              class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-center shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2 text-sm">
+              <span>Direct Application Form</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/feed/update/urn:li:share:7509924372980297728/"
+              target="_blank"
+              class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl text-center border border-slate-700 transition flex items-center justify-center gap-2 text-sm">
+              <i class="fa-brands fa-linkedin text-[#0a66c2]"></i>
+              <span>LinkedIn Post</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Job 2 Dynamic Hero: Premise SaaS -->
+    <div
+      id="hero-premise"
+      class="job-hero max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 w-full hidden">
+      <div
+        class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden border border-emerald-500/30">
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+          <div class="space-y-3 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-2">
+              <span
+                class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-emerald-600 text-white rounded-full flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-laptop-house"></i> 100% Remote
+                (Bangladesh)
+              </span>
+              <span
+                class="px-3 py-1 text-xs font-medium bg-emerald-500/30 text-emerald-200 border border-emerald-400/30 rounded-full">
+                Entry Level / Intern / Final-Year Student
+              </span>
+              <span
+                class="px-3 py-1 text-xs font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 rounded-full">
+                AI-Assisted Workflow Encouraged
+              </span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Full Stack Developer (Entry / Intern)
+              <span class="text-emerald-400 font-normal">at</span> Premise SaaS
+            </h2>
+
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Real Estate PropTech & AI-driven data automation.
+              Language-agnostic philosophy: strong fundamentals in
+              <strong class="text-white"
+                >JavaScript / React / Node / Python</strong
+              >, database architecture, and REST APIs.
+            </p>
+
+            <div
+              class="flex items-center gap-2 text-xs text-emerald-300 font-mono pt-1">
+              <i class="fa-regular fa-calendar-check"></i>
+              <span id="countdown-premise">Deadline: 15 October 2026</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
+            <a
+              href="mailto:golam.murshed@premisesaas.com?subject=Application:%20Full%20Stack%20Developer%20(Entry%20Level%20/%20Intern)%20-%20[Your%20Name]"
+              class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-center shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2 text-sm">
+              <i class="fa-solid fa-envelope"></i>
+              <span>Email CV to Hiring Lead</span>
+            </a>
+            <a
+              href="https://lnkd.in/p/dTii4zgR"
+              target="_blank"
+              class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl text-center border border-slate-700 transition flex items-center justify-center gap-2 text-sm">
+              <i class="fa-brands fa-linkedin text-[#0a66c2]"></i>
+              <span>LinkedIn Post</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
+      <div
+        class="flex border-b border-slate-200 dark:border-slate-800 space-x-6 overflow-x-auto text-sm font-medium">
+        <button
+          onclick="switchTab('spec')"
+          id="tab-spec"
+          class="tab-btn pb-3 text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-file-code"></i> Active Job Specification
+        </button>
+        <button
+          onclick="switchTab('salary')"
+          id="tab-salary"
+          class="tab-btn pb-3 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-sack-dollar"></i> Salary Intelligence &
+          Comparison
+        </button>
+        <button
+          onclick="switchTab('matrix')"
+          id="tab-matrix"
+          class="tab-btn pb-3 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-table-columns"></i> Master Application Matrix
+        </button>
+        <button
+          onclick="switchTab('interview')"
+          id="tab-interview"
+          class="tab-btn pb-3 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 flex items-center gap-2 whitespace-nowrap">
+          <i class="fa-solid fa-brain"></i> Interview Questions & Prep
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content Areas -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
+      <!-- VIEW 1: Active Job Specification -->
+      <section id="view-spec" class="tab-content block space-y-6">
+        <!-- Spec Content for Basirah -->
+        <div id="spec-basirah" class="job-spec space-y-6 block">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 space-y-6">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <h3
+                  class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i class="fa-solid fa-code-branch text-indigo-500"></i>
+                  Technical Scope & Responsibilities
+                </h3>
+                <ul
+                  class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>
+                    <span
+                      >Engineering core services for
+                      <strong>SSP (Supply-Side)</strong> and
+                      <strong>DSP (Demand-Side)</strong> advertising
+                      engines.</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>
+                    <span
+                      >Developing backend APIs and high-concurrency event
+                      handlers in <strong>Go</strong> and
+                      <strong>Express.js</strong>.</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>
+                    <span
+                      >Processing real-time bidding events using
+                      <strong>PostgreSQL</strong>, <strong>Redis</strong>, and
+                      <strong>ClickHouse</strong>.</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-indigo-500 mt-1"></i>
+                    <span
+                      >Understanding and applying
+                      <strong>OpenRTB 2.5/3.0</strong>, <strong>VAST</strong>,
+                      and Google Ad Manager integration.</span
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <h3
+                  class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i class="fa-solid fa-layer-group text-indigo-500"></i> Tech
+                  Stack Overview
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                  <div
+                    class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                    <span
+                      class="text-xs font-bold text-slate-900 dark:text-white block"
+                      >Golang (Go)</span
+                    >
+                    <span class="text-[10px] text-slate-500">RTB Engines</span>
+                  </div>
+                  <div
+                    class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                    <span
+                      class="text-xs font-bold text-slate-900 dark:text-white block"
+                      >Express / Node</span
+                    >
+                    <span class="text-[10px] text-slate-500"
+                      >APIs & Microservices</span
+                    >
+                  </div>
+                  <div
+                    class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                    <span
+                      class="text-xs font-bold text-slate-900 dark:text-white block"
+                      >ClickHouse DB</span
+                    >
+                    <span class="text-[10px] text-slate-500"
+                      >OLAP Real-Time Logs</span
+                    >
+                  </div>
+                  <div
+                    class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-100 dark:border-slate-700">
+                    <span
+                      class="text-xs font-bold text-slate-900 dark:text-white block"
+                      >Redis Cache</span
+                    >
+                    <span class="text-[10px] text-slate-500"
+                      >Low-Latency Cache</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3 text-xs">
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">
+                  Basirah Quick Metadata
+                </h3>
+                <div
+                  class="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-700">
+                  <span class="text-slate-400">Office Location</span>
+                  <span class="font-semibold text-right">Banani, Dhaka</span>
+                </div>
+                <div
+                  class="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-700">
+                  <span class="text-slate-400">Deadline</span>
+                  <span class="font-bold text-red-600">30 Sep 2026</span>
+                </div>
+                <div
+                  class="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-700">
+                  <span class="text-slate-400">Est. Salary</span>
+                  <span class="font-semibold text-emerald-600"
+                    >৳30k - ৳55k /mo</span
+                  >
+                </div>
+                <div class="flex justify-between py-1.5">
+                  <span class="text-slate-400">Apply Method</span>
+                  <a
+                    href="https://lnkd.in/gXkWeUPF"
+                    target="_blank"
+                    class="text-indigo-600 hover:underline font-bold"
+                    >Google Form ↗</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spec Content for Premise SaaS -->
+        <div id="spec-premise" class="job-spec space-y-6 hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 space-y-6">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                <h3
+                  class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i class="fa-solid fa-laptop-code text-emerald-500"></i> Role
+                  Description & Expectations
+                </h3>
+                <ul
+                  class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
+                    <span
+                      >Develop web application features for cloud-based SaaS and
+                      commercial real estate platforms.</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
+                    <span
+                      >Design and integrate clean <strong>REST APIs</strong> and
+                      database schemas (Relational / NoSQL).</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
+                    <span
+                      >Active use of
+                      <strong
+                        >AI-assisted tools (GitHub Copilot, Claude, ChatGPT,
+                        Cursor)</strong
+                      >
+                      to boost code velocity and quality.</span
+                    >
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i
+                      class="fa-solid fa-circle-check text-emerald-500 mt-1"></i>
+                    <span
+                      >Emphasis on
+                      <strong>fundamentals over specific languages</strong> —
+                      any programming background (JS/TS, Python, Go, etc.) is
+                      welcome.</span
+                    >
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Email Application Assistant Box -->
+              <div
+                class="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/30 p-6 rounded-xl border border-emerald-200 dark:border-emerald-800/60 space-y-3">
+                <div class="flex items-center justify-between">
+                  <h4
+                    class="font-bold text-sm text-emerald-950 dark:text-emerald-200 flex items-center gap-2">
+                    <i
+                      class="fa-solid fa-envelope-open-text text-emerald-600"></i>
+                    Prepared Application Email
+                  </h4>
+                  <a
+                    href="mailto:golam.murshed@premisesaas.com?subject=Application:%20Full%20Stack%20Developer%20(Entry%20Level%20/%20Intern)%20-%20[Your%20Name]&body=Dear%20Mr.%20Golam%20Murshed,%0D%0A%0D%0AI%20am%20writing%20to%20express%20my%20strong%20interest%20in%20the%20Full%20Stack%20Developer%20(Entry%20Level%20/%20Intern)%20position%20at%20Premise%20SaaS..."
+                    class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-500 shadow-sm transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-paper-plane"></i> Launch Email App
+                  </a>
+                </div>
+                <p class="text-xs text-emerald-900 dark:text-emerald-300">
+                  Recipient:
+                  <code class="font-bold">golam.murshed@premisesaas.com</code> |
+                  Subject:
+                  <code class="font-bold"
+                    >Application: Full Stack Developer (Entry Level / Intern) –
+                    [Name]</code
+                  >
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div
+                class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3 text-xs">
+                <h3 class="text-sm font-bold text-slate-900 dark:text-white">
+                  Premise SaaS Metadata
+                </h3>
+                <div
+                  class="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-700">
+                  <span class="text-slate-400">Work Mode</span>
+                  <span class="font-semibold text-emerald-600"
+                    >100% Remote (BD)</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-700">
+                  <span class="text-slate-400">Deadline</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >15 Oct 2026</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-700">
+                  <span class="text-slate-400">Est. Salary</span>
+                  <span class="font-semibold text-emerald-600"
+                    >৳20k - ৳45k /mo</span
+                  >
+                </div>
+                <div class="flex justify-between py-1.5">
+                  <span class="text-slate-400">Hiring Lead</span>
+                  <span class="font-semibold">A K M Golam Murshed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Salary Intelligence & Comparison -->
+      <section id="view-salary" class="tab-content hidden space-y-6">
+        <div
+          class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-6">
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">
+            2026 Tech Salary Landscape (Dhaka vs Remote SaaS)
+          </h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              class="p-5 rounded-xl bg-slate-50 dark:bg-slate-700/40 border border-slate-200 dark:border-slate-700 space-y-3">
+              <h4
+                class="font-bold text-sm text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
+                <i class="fa-solid fa-server"></i> Basirah (AdTech & High
+                Concurrency)
+              </h4>
+              <div class="space-y-2 text-xs">
+                <div
+                  class="flex justify-between pb-1 border-b border-slate-200 dark:border-slate-600">
+                  <span>Entry / Fresh Graduate</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >৳25,000 – ৳45,000</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between pb-1 border-b border-slate-200 dark:border-slate-600">
+                  <span>Junior (1–2 yrs + Go/ClickHouse)</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >৳35,000 – ৳60,000</span
+                  >
+                </div>
+                <div class="flex justify-between">
+                  <span>Mid-Level (2–4 yrs)</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >৳60,000 – ৳100,000+</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-5 rounded-xl bg-slate-50 dark:bg-slate-700/40 border border-slate-200 dark:border-slate-700 space-y-3">
+              <h4
+                class="font-bold text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                <i class="fa-solid fa-cloud"></i> Premise SaaS (Remote PropTech)
+              </h4>
+              <div class="space-y-2 text-xs">
+                <div
+                  class="flex justify-between pb-1 border-b border-slate-200 dark:border-slate-600">
+                  <span>Software Developer Intern</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >৳15,000 – ৳25,000</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between pb-1 border-b border-slate-200 dark:border-slate-600">
+                  <span>Entry-Level Full Stack</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >৳25,000 – ৳45,000</span
+                  >
+                </div>
+                <div class="flex justify-between">
+                  <span>Junior-Mid Full Stack (1–2+ yrs)</span>
+                  <span class="font-bold text-slate-900 dark:text-white"
+                    >৳40,000 – ৳70,000</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: Master Matrix -->
+      <section id="view-matrix" class="tab-content hidden space-y-6">
+        <div
+          class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+          <h3 class="text-base font-bold text-slate-900 dark:text-white">
+            Active Application Pipeline Matrix
+          </h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left">
+              <thead
+                class="bg-slate-50 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 font-semibold uppercase">
+                <tr>
+                  <th class="p-3">ID</th>
+                  <th class="p-3">Company</th>
+                  <th class="p-3">Role</th>
+                  <th class="p-3">Work Mode</th>
+                  <th class="p-3">Location</th>
+                  <th class="p-3">Est. Salary</th>
+                  <th class="p-3">Deadline</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3">Apply Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30">
+                  <td class="p-3 font-mono font-bold">#001</td>
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">
+                    Basirah Digital Solutions
+                  </td>
+                  <td class="p-3">Software Engineer</td>
+                  <td class="p-3">On-site</td>
+                  <td class="p-3">Banani, Dhaka</td>
+                  <td
+                    class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">
+                    ৳30k – ৳55k
+                  </td>
+                  <td class="p-3 text-red-600 font-bold">30 Sep 2026</td>
+                  <td class="p-3">
+                    <span
+                      class="px-2 py-1 text-[11px] bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300 rounded font-medium"
+                      >Ready</span
+                    >
+                  </td>
+                  <td class="p-3">
+                    <a
+                      href="https://lnkd.in/gXkWeUPF"
+                      target="_blank"
+                      class="text-indigo-600 hover:underline font-semibold"
+                      >Form ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30">
+                  <td class="p-3 font-mono font-bold">#002</td>
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">
+                    Premise SaaS
+                  </td>
+                  <td class="p-3">Full Stack Dev (Entry/Intern)</td>
+                  <td class="p-3 text-emerald-600 font-semibold">
+                    100% Remote
+                  </td>
+                  <td class="p-3">Bangladesh</td>
+                  <td
+                    class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">
+                    ৳20k – ৳45k
+                  </td>
+                  <td class="p-3 font-bold text-slate-800 dark:text-slate-200">
+                    15 Oct 2026
+                  </td>
+                  <td class="p-3">
+                    <span
+                      class="px-2 py-1 text-[11px] bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300 rounded font-medium"
+                      >Ready</span
+                    >
+                  </td>
+                  <td class="p-3">
+                    <a
+                      href="mailto:golam.murshed@premisesaas.com"
+                      class="text-emerald-600 hover:underline font-semibold"
+                      >Email CV ↗</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: Interview Questions -->
+      <section id="view-interview" class="tab-content hidden space-y-6">
+        <div
+          class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+          <h3
+            class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-question text-amber-500"></i> Interview
+            Focus Points by Company
+          </h3>
+
+          <div class="space-y-4 text-xs">
+            <div
+              class="p-4 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 space-y-2">
+              <h4 class="font-bold text-indigo-950 dark:text-indigo-200">
+                Basirah Digital: AdTech & High-Concurrency Questions
+              </h4>
+              <p>
+                • <strong>OpenRTB Protocol:</strong> How a BidRequest and
+                BidResponse cycle works under 100ms.
+              </p>
+              <p>
+                • <strong>ClickHouse vs Postgres:</strong> Why OLAP columnar
+                storage processes billions of ad rows faster than OLTP row
+                storage.
+              </p>
+              <p>
+                • <strong>Goroutines & Concurrency:</strong> How Go handles tens
+                of thousands of simultaneous HTTP connections without high RAM
+                overhead.
+              </p>
+            </div>
+
+            <div
+              class="p-4 rounded-lg bg-emerald-50/50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 space-y-2">
+              <h4 class="font-bold text-emerald-950 dark:text-emerald-200">
+                Premise SaaS: Multi-Tenant & Full-Stack Fundamentals
+              </h4>
+              <p>
+                • <strong>REST API Principles:</strong> Idempotency (PUT vs POST
+                vs PATCH) and stateless token auth (JWT).
+              </p>
+              <p>
+                • <strong>Multi-Tenant Architecture:</strong> Schema per tenant
+                vs Tenant-ID partitioning in SaaS DBs.
+              </p>
+              <p>
+                • <strong>AI-Assisted Workflow:</strong> How to use
+                Copilot/Claude for test generation, refactoring, and verifying
+                hallucinated code.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 text-center text-xs text-slate-500 dark:text-slate-400">
+      Tech Job Tracker & Management System • File location:
+      <code class="text-indigo-500">d:\cv\JOB_TRACKER.md</code>
+    </footer>
+
+    <script>
+      // Job Switching Function
+      function selectJob(jobId) {
+        document
+          .querySelectorAll(".job-hero")
+          .forEach((el) => el.classList.add("hidden"));
+        document
+          .querySelectorAll(".job-spec")
+          .forEach((el) => el.classList.add("hidden"));
+
+        document.getElementById("jobBtn-basirah").className =
+          "flex-1 p-3.5 rounded-xl text-left transition flex items-center justify-between border border-transparent hover:bg-slate-100 dark:hover:bg-slate-700/50";
+        document.getElementById("jobBtn-premise").className =
+          "flex-1 p-3.5 rounded-xl text-left transition flex items-center justify-between border border-transparent hover:bg-slate-100 dark:hover:bg-slate-700/50";
+
+        if (jobId === "basirah") {
+          document.getElementById("hero-basirah").classList.remove("hidden");
+          document.getElementById("spec-basirah").classList.remove("hidden");
+          document.getElementById("jobBtn-basirah").className =
+            "flex-1 p-3.5 rounded-xl text-left transition flex items-center justify-between border bg-indigo-50/80 dark:bg-indigo-950/50 border-indigo-400 dark:border-indigo-600 shadow-sm";
+        } else {
+          document.getElementById("hero-premise").classList.remove("hidden");
+          document.getElementById("spec-premise").classList.remove("hidden");
+          document.getElementById("jobBtn-premise").className =
+            "flex-1 p-3.5 rounded-xl text-left transition flex items-center justify-between border bg-emerald-50/80 dark:bg-emerald-950/50 border-emerald-400 dark:border-emerald-600 shadow-sm";
+        }
+      }
+
+      // Tab Switching Logic
+      function switchTab(tabId) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => el.classList.add("hidden"));
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.classList.remove(
+            "text-indigo-600",
+            "dark:text-indigo-400",
+            "border-b-2",
+            "border-indigo-600",
+            "dark:border-indigo-400",
+          );
+          btn.classList.add("text-slate-500", "dark:text-slate-400");
+        });
+
+        const activeView = document.getElementById("view-" + tabId);
+        const activeBtn = document.getElementById("tab-" + tabId);
+        if (activeView) activeView.classList.remove("hidden");
+        if (activeBtn) {
+          activeBtn.classList.add(
+            "text-indigo-600",
+            "dark:text-indigo-400",
+            "border-b-2",
+            "border-indigo-600",
+            "dark:border-indigo-400",
+          );
+          activeBtn.classList.remove("text-slate-500", "dark:text-slate-400");
+        }
+      }
+
+      // Theme Toggle
+      const themeToggleBtn = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      themeToggleBtn.addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+        if (document.documentElement.classList.contains("dark")) {
+          themeIcon.classList.replace("fa-moon", "fa-sun");
+        } else {
+          themeIcon.classList.replace("fa-sun", "fa-moon");
+        }
+      });
+
+      // Basirah Countdown
+      function updateCountdown() {
+        const targetDate = new Date(2026, 8, 30, 23, 59, 59);
+        const now = new Date();
+        const diff = targetDate - now;
+
+        const countdownText = document.getElementById("countdown-basirah");
+        if (diff <= 0) {
+          countdownText.innerHTML = "Deadline Reached / Closed";
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        countdownText.innerHTML = `⚠️ Closes in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>

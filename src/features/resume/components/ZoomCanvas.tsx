@@ -111,6 +111,29 @@ export const ZoomCanvas: React.FC<ZoomCanvasProps> = ({
     applyTransform(newX, newY, zoom);
   }, [zoom, applyTransform]);
 
+  // ── Reset stage transforms during browser print for crisp vector PDF output ──
+  useEffect(() => {
+    const handleBeforePrint = () => {
+      if (stageRef.current) {
+        stageRef.current.style.transform = "none";
+        stageRef.current.style.position = "static";
+      }
+    };
+    const handleAfterPrint = () => {
+      if (stageRef.current) {
+        stageRef.current.style.position = "absolute";
+        applyTransform(panRef.current.x, panRef.current.y, zoomRef.current);
+      }
+    };
+
+    window.addEventListener("beforeprint", handleBeforePrint);
+    window.addEventListener("afterprint", handleAfterPrint);
+    return () => {
+      window.removeEventListener("beforeprint", handleBeforePrint);
+      window.removeEventListener("afterprint", handleAfterPrint);
+    };
+  }, [applyTransform]);
+
   // ── Re-center ─────────────────────────────────────────────────────────────
   const centerCanvas = useCallback(() => {
     const container = containerRef.current;
@@ -307,6 +330,7 @@ export const ZoomCanvas: React.FC<ZoomCanvasProps> = ({
         {/* ── Stage: transform applied directly via stageRef — no React renders ── */}
         <div
           ref={stageRef}
+          className="canvas-stage print:!transform-none print:!static print:!w-full print:!top-auto print:!left-auto"
           style={{
             position: "absolute",
             top: 0,
@@ -316,7 +340,7 @@ export const ZoomCanvas: React.FC<ZoomCanvasProps> = ({
             // No CSS transition (applied instantly via DOM for 0-latency feel)
           }}
         >
-          <div className={cn(isDragging && "pointer-events-none")}>
+          <div className={cn(isDragging && "pointer-events-none", "print:!pointer-events-auto print:!select-text")}>
             {children}
           </div>
         </div>

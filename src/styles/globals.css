@@ -194,12 +194,22 @@ body {
     margin: 0;
   }
 
+  /* Ensure text is selectable and interactive so Chromium emits PDF link annotations */
+  *,
+  *::before,
+  *::after {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+  }
+
   /* Hide everything except the resume pages */
   body > *,
   body {
     background: white !important;
     margin: 0 !important;
     padding: 0 !important;
+    -webkit-user-select: text !important;
+    user-select: text !important;
   }
 
   /* Hide all UI chrome */
@@ -210,9 +220,10 @@ body {
     display: none !important;
   }
 
-  /* The canvas stage wrapper — reset any pan/zoom transform */
+  /* The canvas stage wrapper — reset any pan/zoom transform so link annotations align exactly */
   [style*="translate3d"],
-  [style*="scale"] {
+  [style*="scale"],
+  div[style*="position: absolute"] {
     transform: none !important;
     position: static !important;
   }
@@ -223,6 +234,8 @@ body {
     overflow: visible !important;
     width: auto !important;
     height: auto !important;
+    -webkit-user-select: text !important;
+    user-select: text !important;
   }
 
   /* Each resume page: exact A4, no shadow, full bleed */
@@ -245,6 +258,8 @@ body {
     break-after: page;
     display: flex !important;
     flex-direction: column !important;
+    -webkit-user-select: text !important;
+    user-select: text !important;
   }
 
   /* Last page: no trailing page break */
@@ -253,8 +268,19 @@ body {
     break-after: avoid;
   }
 
-  a {
-    color: inherit !important;
-    text-decoration: none !important;
+  /* Links on PDF: active, interactive, clickable */
+  a,
+  a[href] {
+    color: inherit;
+    text-decoration: none;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .template-link {
+    color: var(--link-accent, #2563eb) !important;
+    text-decoration: underline !important;
   }
 }

@@ -224,8 +224,8 @@ export const AICopilotDrawer: React.FC<AICopilotDrawerProps> = ({
         title: "AI Knowledge Graph & Search Engine",
         period: "Feb 2026",
         link: {
-          url: "https://github.com/robinmia",
-          label: "github.com/robinmia",
+          url: "https://github.com/robindev2007",
+          label: "github.com/robindev2007",
         },
         highlights: [
           "Engineered multi-modal retrieval-augmented generation (RAG) system using vector databases and Redis.",
