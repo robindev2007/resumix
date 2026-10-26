@@ -50,7 +50,7 @@ export const defaultResumeDoc: ResumeDocument = {
         },
         {
           key: "Database & ORMs",
-          value: "PostgreSQL, MongoDB, Redis, Prisma, SQL, Drizzle",
+          value: "PostgreSQL, MySQL, MongoDB, Redis, Prisma, SQL, Drizzle",
         },
         {
           key: "Services",

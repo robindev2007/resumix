@@ -31,7 +31,7 @@ export const defaultResumeData: ResumeData = {
     },
     {
       category: "Database & ORMs",
-      items: "PostgreSQL, MongoDB, Redis, Prisma, SQL, Drizzle",
+      items: "PostgreSQL, MySQL, MongoDB, Redis, Prisma, SQL, Drizzle",
     },
     {
       category: "Services",
